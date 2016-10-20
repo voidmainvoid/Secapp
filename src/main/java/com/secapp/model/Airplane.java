@@ -1,5 +1,7 @@
 package com.secapp.model;
 
+import java.io.Serializable;
+
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
@@ -16,7 +18,7 @@ import javax.persistence.Table;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "airplane")
-public class Airplane {
+public class Airplane implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,6 +48,11 @@ public class Airplane {
 
 	public void setReview(String review) {
 		this.review = review;
+	}
+
+	@Override
+	public String toString() {
+		return this.performance + ", " + this.review;
 	}
 
 }

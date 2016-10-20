@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+	airplane.html
+	<form action="#" th:action="@{/airplane/addairplane}" th:object="${Airplane}" method="post">
+		review
+		<input type="text" th:field="*{review}"/> 
+		performance
+		<input type="text" th:field="*{performance}"/> 
+		<input type="submit" />
+	</form>
+</body>
+</html>
