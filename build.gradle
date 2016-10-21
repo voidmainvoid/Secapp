@@ -39,6 +39,10 @@ dependencies {
 	
 	compile group: 'com.h2database', name: 'h2', version: '1.3.148'
 	
+	// https://mvnrepository.com/artifact/org.webjars/jquery
+	compile group: 'org.webjars', name: 'jquery', version: '2.1.3'
+	
+	
 }
 
 // The following closure demonstrates some of the configuration defaults and is not necessary.

@@ -1,5 +1,7 @@
 package com.secapp.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,12 @@ public class AirplaneServiceImpl implements AirplaneService {
 		System.out.println("addAirplane service" + "rev: " + airplane.getReview());
 		this.airplaneRepository.save(airplane);
 
+	}
+
+	@Override
+	public List<Airplane> getAirplanes() {
+		System.out.println("getAirplanes");
+		return this.airplaneRepository.findAll();
 	}
 
 }
