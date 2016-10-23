@@ -1,22 +1,47 @@
 buildscript {
 	ext {
 		springBootVersion = '1.4.0.RELEASE'
+		
+		//querydsl
+		//generatedSourcesDir = file("${buildDir}/generated-sources")
+		generatedSourcesDir = file("src/jpaModelgen/java")
+		
+    	querydslVersion    = "3.4.2" 
 	}
 	repositories {
 		mavenCentral()
+		
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		
 	}	
 }
 
+
+
 plugins {
   	id "at.comm_unity.gradle.plugins.jpamodelgen" version "1.1.1"
+  	
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'spring-boot'
+
+//querydsl
+sourceSets {
+    main {
+        java {
+            srcDir "src/main/java"
+            srcDir generatedSourcesDir
+        }
+    }
+}
+//querydsl
+configurations {
+    querydslapt
+}
 
 jar {
 	baseName = 'secapp'
@@ -42,7 +67,33 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.webjars/jquery
 	compile group: 'org.webjars', name: 'jquery', version: '2.1.3'
 	
+	// https://mvnrepository.com/artifact/org.webjars/bootstrap
+	compile group: 'org.webjars', name: 'bootstrap', version: '3.2.0'
 	
+	//querydsl
+	compile  "com.mysema.querydsl:querydsl-core:${querydslVersion}"
+    compile  "com.mysema.querydsl:querydsl-jpa:${querydslVersion}"
+    querydslapt  "com.mysema.querydsl:querydsl-apt:${querydslVersion}"
+}
+
+//querydsl
+task generateQueryDSL(type: JavaCompile, group: 'build', description: 'Generates the QueryDSL query types') {
+    source = sourceSets.main.java
+    classpath = configurations.compile + configurations.querydslapt
+    options.compilerArgs = [
+            "-proc:only",
+            "-processor", "com.mysema.query.apt.jpa.JPAAnnotationProcessor"
+    ]
+    destinationDir = generatedSourcesDir
+}
+//querydsl
+compileJava {
+    doFirst {
+        generatedSourcesDir.mkdirs();
+    }
+    options.compilerArgs += ['-s', generatedSourcesDir]
+ 
+    dependsOn generateQueryDSL
 }
 
 // The following closure demonstrates some of the configuration defaults and is not necessary.
