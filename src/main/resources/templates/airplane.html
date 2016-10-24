@@ -10,9 +10,7 @@
 	airplane.html
 	<form action="#" th:action="@{/airplane/addairplane}" th:object="${Airplane}" method="post">
 		review
-		<input type="text" th:field="*{review}"/> 
-		performance
-		<input type="text" th:field="*{performance}"/> 
+		<input type="text" th:field="*{review}"/>
 		<input type="submit" />
 	</form>
 	<button type="button" onclick="getAirplanes()">Airplanes</button>
@@ -34,9 +32,9 @@
 					var resJson = JSON.parse(res);
 					console.log(res);
 					
-					for ( var i = 0; i < resJson.length; i++) {
+					/*for ( var i = 0; i < resJson.length; i++) {
 						console.log(resJson[i].performance);
-					}
+					}*/
 					});					
 			}
 		// ]]>

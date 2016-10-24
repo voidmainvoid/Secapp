@@ -1,6 +1,7 @@
 package com.secapp.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -20,39 +21,52 @@ import javax.persistence.Table;
 @DiscriminatorValue(value = "airplane")
 public class Airplane implements Serializable {
 
+	private Date firstFlight;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private Integer performance;
+	private String manufacturer;
+	private String name;
 	private String review;
+
+	public Date getFirstFlight() {
+		return this.firstFlight;
+	}
 
 	public Long getId() {
 		return this.id;
 	}
 
-	public Integer getPerformance() {
-		return this.performance;
+	public String getManufacturer() {
+		return this.manufacturer;
+	}
+
+	public String getName() {
+		return this.name;
 	}
 
 	public String getReview() {
 		return this.review;
 	}
 
+	public void setFirstFlight(Date firstFlight) {
+		this.firstFlight = firstFlight;
+	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public void setPerformance(Integer performance) {
-		this.performance = performance;
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setReview(String review) {
 		this.review = review;
-	}
-
-	@Override
-	public String toString() {
-		return this.performance + ", " + this.review;
 	}
 
 }
