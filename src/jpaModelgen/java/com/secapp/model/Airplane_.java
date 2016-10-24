@@ -8,9 +8,9 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(Airplane.class)
 public abstract class Airplane_ {
 
+	public static volatile SingularAttribute<Airplane, Long> id;
 	public static volatile SingularAttribute<Airplane, Integer> performance;
 	public static volatile SingularAttribute<Airplane, String> review;
-	public static volatile SingularAttribute<Airplane, Long> id;
 
 }
 
