@@ -1,17 +1,19 @@
 package com.secapp.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,13 +21,15 @@ import javax.persistence.Table;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "airplane")
-public class Airplane implements Serializable {
+public class Airplane {
 
 	private Date firstFlight;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String manufacturer;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "manufacturer_id")
+	private Manufacturer manufacturer;
 	private String name;
 	private String review;
 
@@ -37,7 +41,7 @@ public class Airplane implements Serializable {
 		return this.id;
 	}
 
-	public String getManufacturer() {
+	public Manufacturer getManufacturer() {
 		return this.manufacturer;
 	}
 
@@ -57,7 +61,7 @@ public class Airplane implements Serializable {
 		this.id = id;
 	}
 
-	public void setManufacturer(String manufacturer) {
+	public void setManufacturer(Manufacturer manufacturer) {
 		this.manufacturer = manufacturer;
 	}
 
