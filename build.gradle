@@ -6,7 +6,7 @@ buildscript {
 		//generatedSourcesDir = file("${buildDir}/generated-sources")
 		generatedSourcesDir = file("src/jpaModelgen/java")
 		
-    	querydslVersion    = "3.7.4" 
+    	//querydslVersion    = "3.7.4" 
 	}
 	repositories {
 		mavenCentral()
@@ -80,6 +80,8 @@ dependencies {
 	//compile group: 'com.mysema.querydsl', name: 'querydsl-sql-codegen', version: '3.7.4'
 	compile group: 'com.querydsl', name: 'querydsl-sql-codegen', version: '4.1.4'
 	//compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '1.10.4.RELEASE'
+	compile group: 'org.webjars', name: 'angularjs', version: '1.5.8'
+	
 	
     
 }
