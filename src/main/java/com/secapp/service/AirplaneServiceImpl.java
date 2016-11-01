@@ -5,19 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.querydsl.core.types.Predicate;
 import com.secapp.model.Airplane;
-import com.secapp.model.QAirplane;
-import com.secapp.repository.AirplaneRepository;
-import com.secapp.repository.QAirplaneRepository;
+import com.secapp.model.Airplane_;
+import com.secapp.model.QAirplane;  
+import com.secapp.repository.AirplaneRepository; 
 
 @Service
 public class AirplaneServiceImpl implements AirplaneService {
 
 	@Autowired
 	private AirplaneRepository airplaneRepository;
-	@Autowired
-	private QAirplaneRepository qQAirplaneRepository;
+//	@Autowired 
+//	private QAirplaneRepository QAirplaneRepository;
 
 	@Override
 	public void addAirplane(Airplane airplane) {
@@ -28,11 +27,12 @@ public class AirplaneServiceImpl implements AirplaneService {
 	@Override
 	public List<Airplane> getAirplanes() {
 		System.out.println("getAirplanes");
-
-		QAirplane qAirplane = QAirplane.airplane;
-		Predicate pred = qAirplane.review.eq("xxx");
-		List<Airplane> list = (List<Airplane>) this.qQAirplaneRepository.findAll(pred);
-		System.out.println("DSL: " + list.size());
+		
+		Airplane_ a;
+//		QAirplane qAirplane = QAirplane.airplane;
+//		Predicate pred = qAirplane.review.eq("xxx");
+//		List<Airplane> list = (List<Airplane>) this.QAirplaneRepository.findAll(pred);
+//		System.out.println("DSL: " + list.size());
 
 		return this.airplaneRepository.findAll();
 	}

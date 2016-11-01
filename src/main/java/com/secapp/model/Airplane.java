@@ -32,6 +32,7 @@ public class Airplane {
 	private Manufacturer manufacturer;
 	private String name;
 	private String review;
+	private String dummy;
 
 	public Date getFirstFlight() {
 		return this.firstFlight;
@@ -72,5 +73,15 @@ public class Airplane {
 	public void setReview(String review) {
 		this.review = review;
 	}
+
+	public String getDummy() {
+		return dummy;
+	}
+
+	public void setDummy(String dummy) {
+		this.dummy = dummy;
+	}
+	
+	
 
 }

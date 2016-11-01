@@ -22,6 +22,8 @@ public class QAirplane extends EntityPathBase<Airplane> {
 
     public static final QAirplane airplane = new QAirplane("airplane");
 
+    public final StringPath dummy = createString("dummy");
+
     public final DateTimePath<java.util.Date> firstFlight = createDateTime("firstFlight", java.util.Date.class);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);

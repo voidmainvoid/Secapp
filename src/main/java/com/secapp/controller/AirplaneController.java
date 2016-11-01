@@ -38,6 +38,7 @@ public class AirplaneController {
 	@ResponseBody
 	public List<Airplane> getAirplanes() {
 		System.out.println("getAirplanes");
+		
 		return this.airplaneService.getAirplanes();
 	}
 
