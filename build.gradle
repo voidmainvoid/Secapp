@@ -1,28 +1,22 @@
 buildscript {
 	ext {
-		springBootVersion = '1.4.0.RELEASE'
-		
-		//querydsl
+		springBootVersion = '1.4.1.RELEASE'
+		generatedSourcesDir = file("src/jpaModelgen/java")
 		//generatedSourcesDir = file("${buildDir}/generated-sources")
-		generatedSourcesDir = file("src/jpaModelgenQ/java")
-		
+		//generatedSourcesDir = file("src/jpaModelgenQ/java")
     	//querydslVersion    = "3.7.4" 
 	}
 	repositories {
 		mavenCentral()
-		
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		
 	}	
 }
 
 
-
 plugins {
   	id "at.comm_unity.gradle.plugins.jpamodelgen" version "1.1.1"
-  	
 }
 
 apply plugin: 'java'
@@ -82,10 +76,6 @@ dependencies {
 	//compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '1.10.4.RELEASE'
 	compile group: 'org.webjars', name: 'angularjs', version: '1.5.8'
 	compile group: 'org.webjars', name: 'kendo-ui-core', version: '2014.2.716'
-	
-	
-	
-    
 }
 
 //querydsl
@@ -101,9 +91,18 @@ task generateQueryDSL(type: JavaCompile, group: 'build', description: 'Generates
     destinationDir = generatedSourcesDir
 }
 
+//querydsl
+compileJava {
+    doFirst {
+        generatedSourcesDir.mkdirs();
+    }
+    options.compilerArgs += ['-s', generatedSourcesDir]
+ 
+    dependsOn generateQueryDSL
+}
+
 // The following closure demonstrates some of the configuration defaults and is not necessary.
 jpaModelgen {
-  println "-- jpaModelgen 1--"
   library = "org.hibernate:hibernate-jpamodelgen:4.3.8.Final"
   jpaModelgenSourcesDir = "src/jpaModelgen/java"
 }
@@ -111,19 +110,3 @@ jpaModelgen {
 // Important!!! Following configuration of compile java arguments 
 // should be ALWAYS present when using jpamodelgen plugin.
 compileJava.options.compilerArgs += ["-proc:none"]
-
-
-
-//querydsl
-compileJava {
-	println "-- compileJava 1--"
-    doFirst {
-        println "-- compileJava 2-- doFirst"
-        generatedSourcesDir.mkdirs();
-    }
-    /*options.compilerArgs += ['-s', generatedSourcesDir]*/
- 
-    dependsOn generateQueryDSL
-}
-
-
